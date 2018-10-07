@@ -1,0 +1,29 @@
+{
+    "presets": [
+        [
+            "env",
+            {
+                "targets": {
+                    "node": "current"
+                }
+            }
+        ]
+    ],
+    "plugins": [
+        [
+            "module-resolver",
+            {
+                "root": [
+                    "./src"
+                ],
+                "alias": {
+                    "utils": "./src/utils",
+                    "server": "./src/server",
+                    "service": "./src/recordingService",
+                    "db": "./src/dal",
+                    "logger": "./src/utils/logger"
+                }
+            }
+        ]
+    ]
+}

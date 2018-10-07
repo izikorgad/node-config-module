@@ -1,0 +1,40 @@
+{
+  "name": "node-config-module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "nodemon --inspect  ./src/index.js --exec babel-node",
+    "build": "babel src --out-dir lib --copy-files --ignore **/*.spec.js",
+    "run:prod": "node .",
+    "test": "nyc --temp-directory coverage --reporter=html --reporter=text --exclude **/*.spec.js mocha --require babel-register  ./src/**/*.spec.js --require babel-core/register --coverage",
+    "lint": "eslint --ignore-path ./config/.eslintignore --config ./config/.eslintrc.json ."
+  },
+  "files": [
+    "lib",
+    "package.json",
+    "README.md"
+
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chokidar": "^2.0.4",
+    "graceful-fs": "^4.1.11"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-preset-env": "^1.7.0",
+    "chai": "^4.1.2",
+    "eslint": "^5.4.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.3",
+    "nyc": "^12.0.2"
+  }
+}
