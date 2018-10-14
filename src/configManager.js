@@ -51,7 +51,7 @@ export const init = (defaultConfig, newConfigFileName, cb) => {
     // Watch for file changes
     watchChokidar();
 
-    cb(null, defaultConfig);
+    cb(null, config);
   }
   catch (ex) {
     console.log(ex);
