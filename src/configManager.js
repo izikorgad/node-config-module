@@ -73,6 +73,8 @@ const readConfig = (configFile = configFileName) => {
 
   config = parseConfigContent(content);
   console.log(`config read: ${JSON.stringify(config)}, file: ${resolvedPath}.`);
+
+  return config;
 };
 
 const parseConfigContent = (content) => {
