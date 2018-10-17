@@ -59,7 +59,7 @@ export const init = (defaultConfig, newConfigFileName, cb) => {
 };
 
 export const getConfig = () => {
-  if (!config || _.length(Object.keys(config)) === 0) {
+  if (!config || _.size(config) === 0) {
     readConfig();
   }
   return config;
