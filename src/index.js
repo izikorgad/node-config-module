@@ -1,3 +1,2 @@
 import * as ConfigManager from './configManager';
-
-module.exports = { ConfigManager };
+export default ConfigManager;

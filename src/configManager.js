@@ -26,7 +26,7 @@ const configFileExists = (configFile = configFileName) => {
     if (e.code == 'ENOENT') {
       console.log(`Config file not found at ${configFile}.`);
     } else {
-      console.log(`Config file check error at ${configFile}: ${e}` );
+      console.log(`Config file check error at ${configFile}: ${e}`);
     }
     return false;
   }
@@ -36,7 +36,7 @@ export const init = (defaultConfig, newConfigFileName, cb) => {
   try {
     console.log('Config initializing...');
 
-    if(newConfigFileName != null) {
+    if (newConfigFileName != null) {
       configFileName = newConfigFileName;
     }
 
@@ -59,6 +59,9 @@ export const init = (defaultConfig, newConfigFileName, cb) => {
 };
 
 export const getConfig = () => {
+  if (!config || _.size(config) === 0) {
+    readConfig();
+  }
   return config;
 };
 
