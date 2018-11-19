@@ -144,6 +144,13 @@ export const updateConfig = (attributes) => {
   const content = JSON.stringify(newConfig, null, 3);
 
   try {
+
+    const dirName = path.dirname(configFileName);
+    // Create config directory if it does not exist
+    if (!fs.existsSync(dirName)) {
+      fs.mkdirSync(dirName);
+    }
+
     fs.writeFileSync(configFileName, content, { mode: '0777' });
     console.log(`Config file updated: ${content}`);
     return newConfig;
