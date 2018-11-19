@@ -14,6 +14,32 @@ const createDefaultConfigFile = (defaultConfig) => {
   updateConfig();
 };
 
+export const getLocalConfig = (configFile = configFileName, defaultConfig) => {
+  if (!configFileExists(configFile)) {
+    try {
+
+      const content = JSON.stringify(defaultConfig, null, 3);
+
+      const dirName = path.dirname(configFile);
+      // Create config directory if it does not exist
+      if (!fs.existsSync(dirName)) {
+        fs.mkdirSync(dirName);
+      }
+
+      fs.writeFileSync(configFile, content, { mode: '0777' });
+      console.log(`Local config file created: ${content}`);
+      return defaultConfig;
+    }
+    catch (ex) {
+      console.log(`Local config file creation error: ${ex.message}`);
+      throw new Error(`Failed to create local config file at ${configFile}: ${ex.message}`);
+    }
+  }
+  else {
+    return readConfig(configFile);
+  }
+};
+
 const configFileExists = (configFile = configFileName) => {
   try {
     const stat = fs.statSync(configFile);
@@ -45,7 +71,7 @@ export const init = (defaultConfig, newConfigFileName, cb) => {
       createDefaultConfigFile(defaultConfig);
     }
     else {
-      readConfig();    // Read to config object
+      config = readConfig();    // Read to config object
     }
 
     // Watch for file changes
@@ -58,11 +84,13 @@ export const init = (defaultConfig, newConfigFileName, cb) => {
   }
 };
 
-export const getConfig = () => {
+export const getConfig = (configFile = configFileName) => {
   if (!config || _.size(config) === 0) {
-    readConfig();
+    return readConfig(configFile);
   }
-  return config;
+  else {
+    return config;
+  }
 };
 
 const readConfig = (configFile = configFileName) => {
@@ -74,8 +102,9 @@ const readConfig = (configFile = configFileName) => {
 
   const content = fs.readFileSync(resolvedPath);
 
-  config = parseConfigContent(content);
+  const config = parseConfigContent(content);
   console.log(`config read: ${JSON.stringify(config)}, file: ${resolvedPath}.`);
+  return config;
 };
 
 const parseConfigContent = (content) => {
