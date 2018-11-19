@@ -162,5 +162,5 @@ export const updateConfig = (attributes) => {
 };
 
 if (process.env.npm_lifecycle_event === 'test') {
-  module.exports = { createDefaultConfigFile, configFileExists, parseConfigContent, updateConfig, readConfig, getConfig };
+  module.exports = { init, createDefaultConfigFile, configFileExists, parseConfigContent, updateConfig, readConfig, getConfig, setConfigChangeCallback };
 }
